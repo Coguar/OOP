@@ -1,0 +1,1 @@
+replace.exe <InputFile> <OutputFile> <ToFind> <ToReplace>
