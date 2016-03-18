@@ -5,6 +5,9 @@
 
 const std::string DIC_FILE = "dictionary.txt";
 
+const std::string FINISH_ADD_WORD_STRING = "new word remebered like ";
+const std::string WHETHER_ADD_WORD_STRING = "add translate or press Enter to skip";
+
 const char DELIMITER = '=';
 const std::string EXIT_LINE = "...";
 

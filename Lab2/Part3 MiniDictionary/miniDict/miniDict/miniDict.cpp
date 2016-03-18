@@ -3,13 +3,20 @@
 
 #include "stdafx.h"
 #include "Dictionary.h"
-
+#include <ctype.h>
 #include <windows.h>
 
 
 
 using namespace std;
 
+void ConvertToLowercase(string & word)
+{
+	for (auto &it : word)
+	{
+		it = char(tolower(it));
+	}
+}
 
 int main(int argc, char *argv[])
 {
@@ -27,9 +34,9 @@ int main(int argc, char *argv[])
 	{
 		if (!englishWord.empty())
 		{
+			ConvertToLowercase(englishWord);
 			dictionary.Dialog(englishWord);
 		}
-		//действие
 	}
 
 	dictionary.DictionarySave();

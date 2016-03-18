@@ -5,3 +5,6 @@ cat=kot
 =kkot
 kot=kitty
 dog=cobaka
+i love you=я
+ тебя люблю=12
+крассный бык=red bul

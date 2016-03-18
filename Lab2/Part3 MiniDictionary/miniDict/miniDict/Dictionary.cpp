@@ -6,6 +6,8 @@ void CDictionary::AddNewWord(std::string englishWord, std::string russianWord)
 	m_dictionaryList.insert(std::pair<std::string, std::string>(englishWord, russianWord));
 
 	m_newCollocations.push_back(englishWord + "=" + russianWord);
+
+	std::cout << FINISH_ADD_WORD_STRING << russianWord << std::endl;
 }
 
 bool CDictionary::FindWord(std::string englishWord)
@@ -82,15 +84,14 @@ void CDictionary::Dialog(std::string word)
 			}
 			break;
 		case addWord:
-			std::cout << "add translate or press Enter to skip" << std::endl;
+			std::cout << WHETHER_ADD_WORD_STRING << std::endl;
 			std::string translate;
-			std::cin >> translate;
+			std::getline(std::cin, translate);
 			if (!translate.empty())
 			{
 				AddNewWord(word, translate);
 			}
 
-			//AddNewWord(word, translate);
 			m_state = finish;
 			break;
 		}
