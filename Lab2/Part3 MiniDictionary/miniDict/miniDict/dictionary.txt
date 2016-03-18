@@ -1,0 +1,7 @@
+hello=1
+hi=2
+cat = 3
+cat=kot
+=kkot
+kot=kitty
+dog=cobaka
