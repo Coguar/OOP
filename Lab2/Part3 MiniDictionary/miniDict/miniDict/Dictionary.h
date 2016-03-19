@@ -13,9 +13,12 @@ const std::string EXIT_LINE = "...";
 
 typedef std::pair<std::string, std::string> Collocation;
 
+Collocation GetPairOfWords(std::string line);
+
 class CDictionary
 {
 public:
+	CDictionary();
 
 	void Dialog(std::string word);
 
@@ -23,19 +26,23 @@ public:
 
 	void LoadDictionaryFromFile();
 
+
 private:
-	void AddNewWord(std::string englishWord, std::string russianWord);
+	enum state
+	{
+		findWord, addWord, finish
+	} m_state;
 
 	bool FindWord(std::string englishWord);
 
-
 	void SaveChanges();
+
+	void AddNewWord(std::string englishWord, std::string russianWord);
 
 	std::vector<std::string> m_newCollocations;
 
 	std::map<std::string, std::string> m_dictionaryList;
 
-	enum state 
-	{findWord, addWord, finish} m_state;
+	std::string m_dictionaryFile;
 
 };

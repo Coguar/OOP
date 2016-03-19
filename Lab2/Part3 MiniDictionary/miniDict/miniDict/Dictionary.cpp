@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "Dictionary.h"
 
+CDictionary::CDictionary()
+{
+	m_dictionaryFile = DIC_FILE;
+	LoadDictionaryFromFile();
+}
+
 void CDictionary::AddNewWord(std::string englishWord, std::string russianWord)
 {
 	m_dictionaryList.insert(std::pair<std::string, std::string>(englishWord, russianWord));
@@ -48,7 +54,7 @@ void CDictionary::LoadDictionaryFromFile()
 {
 	std::string line;
 
-	std::ifstream dictInputFile(DIC_FILE);
+	std::ifstream dictInputFile(m_dictionaryFile);
 	while (std::getline(dictInputFile, line))
 	{
 
@@ -59,7 +65,7 @@ void CDictionary::LoadDictionaryFromFile()
 
 void CDictionary::SaveChanges()
 {
-	std::ofstream dictFile(DIC_FILE, std::ios_base::app);
+	std::ofstream dictFile(m_dictionaryFile, std::ios_base::app);
 	for (auto &it : m_newCollocations)
 	{
 		dictFile << it << std::endl;

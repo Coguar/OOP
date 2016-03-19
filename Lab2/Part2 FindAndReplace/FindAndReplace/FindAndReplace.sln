@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindAndReplace", "FindAndReplace\FindAndReplace.vcxproj", "{8F783E6B-3A62-405F-9DCD-7122CA20F893}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EBD7295-6AB7-4DAE-BCBE-AAF4A276124A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindAndReplace_tests", "..\FindAndReplace_tests\FindAndReplace_test\FindAndReplace_test.vcxproj", "{0794A693-41EB-458E-88D2-FC0C7DFD1217}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,14 @@ Global
 		{8F783E6B-3A62-405F-9DCD-7122CA20F893}.Release|x64.Build.0 = Release|x64
 		{8F783E6B-3A62-405F-9DCD-7122CA20F893}.Release|x86.ActiveCfg = Release|Win32
 		{8F783E6B-3A62-405F-9DCD-7122CA20F893}.Release|x86.Build.0 = Release|Win32
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Debug|x64.ActiveCfg = Debug|x64
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Debug|x64.Build.0 = Debug|x64
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Debug|x86.ActiveCfg = Debug|Win32
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Debug|x86.Build.0 = Debug|Win32
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Release|x64.ActiveCfg = Release|x64
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Release|x64.Build.0 = Release|x64
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Release|x86.ActiveCfg = Release|Win32
+		{0794A693-41EB-458E-88D2-FC0C7DFD1217}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
