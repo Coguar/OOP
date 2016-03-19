@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#include <boost/utility/string_ref.hpp>
+
 
 
 // TODO: reference additional headers your program requires here

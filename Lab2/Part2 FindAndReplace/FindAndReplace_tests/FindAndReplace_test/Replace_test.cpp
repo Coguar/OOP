@@ -1,81 +1,67 @@
 
 #include "stdafx.h"
 #include "../../FindAndReplace/FindAndReplace/Replace.h"
+#include <iostream>
 
 using namespace std;
 
 BOOST_AUTO_TEST_SUITE(FindAndReplace_function)
 
-BOOST_AUTO_TEST_CASE(give_empty_string)
-{
-	string subject = "";
-	string search = "";
-	string replace = "";
+	BOOST_AUTO_TEST_CASE(return_empty_string_from_empty_string)
+	{
+		string subject = "";
+		string search = "";
+		string replace = "";
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str.empty());
-}
+		string str = FindAndReplace(subject, search, replace);
+		BOOST_CHECK(str.empty());
+	}
 
-BOOST_AUTO_TEST_CASE(give_string_without_replace)
-{
-	string subject = "mama";
-	string search = "";
-	string replace = "";
+	BOOST_AUTO_TEST_CASE(replace_search_string_on_replace_string)
+	{
+		string subject = "mama";
+		string search = "ma";
+		string replace = "cat";
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(subject == str);
-}
+		string str = FindAndReplace(subject, search, replace);
+		std::cout << str << std::endl;
+		BOOST_CHECK(str == "catcat");
+	}
 
-BOOST_AUTO_TEST_CASE(give_string_and_replace_ma_on_cat)
-{
-	string subject = "mama";
-	string search = "ma";
-	string replace = "cat";
+	BOOST_AUTO_TEST_CASE(return_source_string_if_search_string_is_empty)
+	{
+		string subject = "mama";
+		string search = "";
+		string replace = "mama";
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str == "catcat");
-}
+		string str = FindAndReplace(subject, search, replace);
+		BOOST_CHECK(str == "mama");
 
-BOOST_AUTO_TEST_CASE(give_string_and_replace_ma_on_mama)
-{
-	string subject = "mama";
-	string search = "ma";
-	string replace = "mama";
+	}
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str == "mamamama");
-}
+	BOOST_AUTO_TEST_CASE(delete_search_string_from_source_string_if_replace_string_is_empty)
+	{
+		string subject = "mama";
+		string search = "ma";
+		string replace = "";
 
-BOOST_AUTO_TEST_CASE(give_empty_search_string)
-{
-	string subject = "mama";
-	string search = "";
-	string replace = "mama";
+		string str = FindAndReplace(subject, search, replace);
+		BOOST_CHECK(str.empty());
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str == "mama");
+	}
 
-}
+	BOOST_AUTO_TEST_CASE(replace_search_string_on_double_search_string)
+	{
+		string subject = "mamamama";
+		string search = "ma";
+		string replace = "mama";
 
-BOOST_AUTO_TEST_CASE(give_empty_replace_string)
-{
-	string subject = "mama";
-	string search = "ma";
-	string replace = "";
+		
+		string str = FindAndReplace(subject, search, replace);
+		std::cout << str << std::endl;
 
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str.empty());
+		BOOST_CHECK(str == "mamamamamamamama");
 
-}
+	}
 
-BOOST_AUTO_TEST_CASE(give_string_and_replace_ma_on_mama_four_times)
-{
-	string subject = "mamamama";
-	string search = "ma";
-	string replace = "mama";
-
-	string str = FindAndReplace(subject, search, replace);
-	BOOST_CHECK(str == "mamamamamamamama");
-
-}
 BOOST_AUTO_TEST_SUITE_END()

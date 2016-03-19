@@ -12,18 +12,23 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	if (argc == 3)
+
+	if (argc != 3)
 	{
-		string subjectLine;
-		while (getline(cin, subjectLine))
-		{
-			if (subjectLine.empty())
-			{
-				break;
-			}
-			cout << FindAndReplace(subjectLine, argv[1], argv[2]) << endl;
-		}
+		cout << "FindAndReplace.exe <ToFind> <ToReplace>" << endl;
+		return 0;
 	}
-    return 0;
+
+	string subjectLine;
+	while (getline(cin, subjectLine))
+	{
+		if (subjectLine.empty())
+		{
+			break;
+		}
+		cout << FindAndReplace(subjectLine, argv[1], argv[2]) << endl;
+	}
+
+	return 0;
 }
 

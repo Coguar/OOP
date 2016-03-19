@@ -1,25 +1,31 @@
 #include "stdafx.h"
 #include "Replace.h"
+#include <cassert>
+#include <iostream>
 
-void Replace(std::string & subject, std::string const& search, std::string const& replace, size_t & i)
-{
-	subject += replace;
-	i += search.size() - 1;
-}
 
 std::string FindAndReplace(std::string subject, std::string search, std::string replace)
 {
-	std::string str;
-	for (size_t i = 0; i < subject.size();  ++i)
+	if (search.empty())
 	{
-		std::string test = subject.substr(i, i + search.size());
-		if (subject[i] == search[0] && subject.substr(i, search.size()) == search)
+		return subject;
+	}
+	std::string str;
+
+	for (size_t i = 0; i <= subject.length() - search.length();)
+	{
+		assert(i + search.size() <= subject.length());
+		if (std::equal(subject.begin() + i, subject.begin() + i + search.size(), search.begin()))
 		{
-			Replace(str, search, replace, i);
+			
+			str += replace;
+			i += search.size();
+			std::cout << i << "   " <<subject[i] << "   "<<str << std::endl;
 		}
 		else
 		{
 			str += subject[i];
+			++i;
 		}
 	}
 	return str;

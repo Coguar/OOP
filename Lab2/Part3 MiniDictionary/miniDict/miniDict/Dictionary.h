@@ -26,8 +26,6 @@ public:
 
 	void LoadDictionaryFromFile();
 
-
-private:
 	enum state
 	{
 		findWord, addWord, finish
