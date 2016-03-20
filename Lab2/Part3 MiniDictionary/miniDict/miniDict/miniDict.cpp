@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include "Translator.h"
 #include "Dictionary.h"
 #include <ctype.h>
 #include <windows.h>
@@ -29,13 +30,14 @@ int main(int argc, char *argv[])
 
 	string englishWord;
 	CDictionary dictionary;
+	CTranslator translator(dictionary);
 	dictionary.LoadDictionaryFromFile();
 	while (getline(cin, englishWord) && englishWord != EXIT_LINE)
 	{
 		if (!englishWord.empty())
 		{
 			ConvertToLowercase(englishWord);
-			dictionary.Dialog(englishWord);
+			translator.DialogWithUser(englishWord);
 		}
 	}
 

@@ -16,5 +16,7 @@
 #include <iostream>
 #include <fstream>
 
+#include <sstream>
+#include <functional>
 
 // TODO: reference additional headers your program requires here

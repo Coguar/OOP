@@ -20,22 +20,24 @@ class CDictionary
 public:
 	CDictionary();
 
-	void Dialog(std::string word);
-
 	void DictionarySave();
 
 	void LoadDictionaryFromFile();
 
-	enum state
-	{
-		findWord, addWord, finish
-	} m_state;
-
 	bool FindWord(std::string englishWord);
 
-	void SaveChanges();
-
 	void AddNewWord(std::string englishWord, std::string russianWord);
+
+	void SetDictionaryFile(std::string fileName);
+
+	bool DictListStat() { return m_dictionaryList.empty(); }
+
+	bool DictsNewWordsStat() { return m_newCollocations.empty(); }
+
+
+private:
+
+	void SaveChanges();
 
 	std::vector<std::string> m_newCollocations;
 

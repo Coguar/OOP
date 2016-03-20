@@ -73,43 +73,15 @@ void CDictionary::SaveChanges()
 	dictFile.close();
 }
 
-void CDictionary::Dialog(std::string word)
-{
-	while (m_state != finish)
-	{
-		switch (m_state)
-		{
-		case findWord:
-			if (FindWord(word))
-			{
-				m_state = finish;
-			}
-			else
-			{
-				m_state = addWord;
-			}
-			break;
-		case addWord:
-			std::cout << WHETHER_ADD_WORD_STRING << std::endl;
-			std::string translate;
-			std::getline(std::cin, translate);
-			if (!translate.empty())
-			{
-				AddNewWord(word, translate);
-			}
-
-			m_state = finish;
-			break;
-		}
-
-	}
-	m_state = findWord;
-}
-
 void CDictionary::DictionarySave()
 {
 	if (!m_newCollocations.empty())
 	{
 		SaveChanges();
 	}
+}
+
+void CDictionary::SetDictionaryFile(std::string fileName)
+{
+	m_dictionaryFile = fileName;
 }
