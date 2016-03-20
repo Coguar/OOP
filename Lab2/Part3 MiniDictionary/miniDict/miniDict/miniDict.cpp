@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 	SetConsoleCP(1251);
 	if (argc != 1)
 	{
+		cout << "The command has no additional parameters" << endl;
 		return 0;
 	}
 
@@ -40,8 +41,27 @@ int main(int argc, char *argv[])
 			translator.DialogWithUser(englishWord);
 		}
 	}
-
-	dictionary.DictionarySave();
+	string answer;
+	if (!dictionary.DictsNewWordsStat())
+	{
+		cout << "Do you want to save new words? YES/NO" << endl;
+		while (getline(cin, answer))
+		{
+			if (answer == "YES")
+			{
+				dictionary.DictionarySave();
+				break;
+			}
+			else if (answer == "NO")
+			{
+				break;
+			}
+			else
+			{
+				cout << "Try again" << endl;
+			}
+		}
+	}
 	return 0;
 }
 
