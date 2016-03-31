@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Generator.h"
 
-set<size_t> CGenerator::GetSetOfPrimeNumbers(size_t range)
+set<size_t> CGenerator::GetSetOfPrimeNumbers(size_t const& range)
 {
 	size_t usingRange = range;
 	set<size_t> primeNumbersSet;
