@@ -5,6 +5,7 @@
 
 #pragma once
 
+#define _SCL_SECURE_NO_WARNINGS
 #include "targetver.h"
 
 #include <stdio.h>
@@ -16,7 +17,7 @@
 #include <iostream>
 #include <fstream>
 
-#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string.hpp>
 
 #define BOOST_TEST_INCLUDED
 #pragma warning (disable: 4702)

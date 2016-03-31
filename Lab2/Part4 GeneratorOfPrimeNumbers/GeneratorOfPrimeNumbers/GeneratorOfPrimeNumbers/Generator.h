@@ -8,6 +8,7 @@ class CGenerator
 {
 public:
 	static set<size_t> GetSetOfPrimeNumbers(size_t range);
+
 private:
 	static void PrepareInitialVector(vector<bool> & sieve, size_t const& range);
 

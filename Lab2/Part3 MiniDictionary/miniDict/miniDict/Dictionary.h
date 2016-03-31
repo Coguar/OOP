@@ -3,41 +3,40 @@
 #include <map>
 #include <vector>
 
-const std::string DIC_FILE = "dictionary.txt";
+static const std::string DIC_FILE = "dictionary.txt";
 
-const std::string FINISH_ADD_WORD_STRING = "new word remebered like ";
-const std::string WHETHER_ADD_WORD_STRING = "add translate or press Enter to skip";
+static const std::string FINISH_ADD_WORD_STRING = "new word remebered like ";
+static const std::string WHETHER_ADD_WORD_STRING = "add translate or press Enter to skip";
 
-const char DELIMITER = '=';
-const std::string EXIT_LINE = "...";
+static const std::string DELIMITER = "=";
+static const std::string EXIT_LINE = "...";
 
 typedef std::pair<std::string, std::string> Collocation;
 
-Collocation GetPairOfWords(std::string line);
+Collocation SplitPairOfWords(std::string const& line);
 
 class CDictionary
 {
 public:
 	CDictionary();
 
-	void DictionarySave();
+	void AddNewWord(std::string const& englishWord, std::string const& russianWord);
 
-	void LoadDictionaryFromFile();
+	void SetDictionaryFile(std::string const& fileName);
 
-	bool FindWord(std::string englishWord);
+	void DictionarySave() const;
 
-	void AddNewWord(std::string englishWord, std::string russianWord);
+	bool FindWord(std::string const& englishWord) const;
 
-	void SetDictionaryFile(std::string fileName);
+	bool IsDictionaryEmpty() const { return m_dictionaryList.empty(); }
 
-	bool DictListStat() { return m_dictionaryList.empty(); }
-
-	bool DictsNewWordsStat() { return m_newCollocations.empty(); }
-
+	bool IsNewWordsListEmpty() const { return m_newCollocations.empty(); }
 
 private:
 
-	void SaveChanges();
+	void LoadDictionary();
+
+	void SaveChanges() const;
 
 	std::vector<std::string> m_newCollocations;
 

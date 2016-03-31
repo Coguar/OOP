@@ -3,13 +3,14 @@
 
 set<size_t> CGenerator::GetSetOfPrimeNumbers(size_t range)
 {
+	size_t usingRange = range;
 	set<size_t> primeNumbersSet;
 	if (range <= MAX_RANGE && range >= MIN_RANGE)
 	{
 		vector<bool> sieve;
-		PrepareInitialVector(sieve, range);
-		MarkComplexNumbers(sieve, range);
-		FillInSet(primeNumbersSet, sieve, range);
+		PrepareInitialVector(sieve, usingRange);
+		MarkComplexNumbers(sieve, usingRange);
+		FillInSet(primeNumbersSet, sieve, usingRange);
 	}
 	return primeNumbersSet;
 }
@@ -20,6 +21,7 @@ void CGenerator::PrepareInitialVector(vector<bool> & sieve, size_t const& range)
 	sieve = vector<bool>(range + 1, true);
 	sieve[0] = false;
 	sieve[1] = false;
+
 }
 
 void CGenerator::MarkComplexNumbers(vector<bool> & sieve, size_t const& range)

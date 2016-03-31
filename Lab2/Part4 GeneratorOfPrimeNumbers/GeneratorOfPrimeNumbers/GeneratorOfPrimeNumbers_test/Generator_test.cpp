@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "../GeneratorOfPrimeNumbers/Generator.h"
+#include <iostream>
 
 using namespace std;
 
@@ -23,6 +24,12 @@ BOOST_AUTO_TEST_CASE(set_of_few_element_when_true_range)
 {
 	auto testSet = CGenerator::GetSetOfPrimeNumbers(7);
 	BOOST_CHECK(testSet.size() == 4);
+}
+
+BOOST_AUTO_TEST_CASE(if_numbers_range_is_max_then_count_of_prime_num_will_be_max_too)
+{
+	auto testSet = CGenerator::GetSetOfPrimeNumbers(100000000);
+	BOOST_CHECK_EQUAL(testSet.size(), size_t(5761455));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

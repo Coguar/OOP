@@ -32,17 +32,16 @@ int main(int argc, char *argv[])
 	string englishWord;
 	CDictionary dictionary;
 	CTranslator translator(dictionary);
-	dictionary.LoadDictionaryFromFile();
 	while (getline(cin, englishWord) && englishWord != EXIT_LINE)
 	{
 		if (!englishWord.empty())
 		{
 			ConvertToLowercase(englishWord);
-			translator.DialogWithUser(englishWord);
+			translator.DoDialogWithUser(englishWord);
 		}
 	}
 	string answer;
-	if (!dictionary.DictsNewWordsStat())
+	if (!dictionary.IsNewWordsListEmpty())
 	{
 		cout << "Do you want to save new words? YES/NO" << endl;
 		while (getline(cin, answer))

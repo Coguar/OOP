@@ -4,23 +4,22 @@
 #include <iostream>
 
 
-std::string FindAndReplace(std::string subject, std::string search, std::string replace)
+std::string FindAndReplace(std::string const& subject, std::string const& search, std::string const& replace)
 {
-	if (search.empty())
+	if (search.empty() || search.length() > subject.length())
 	{
 		return subject;
 	}
 	std::string str;
 
-	for (size_t i = 0; i <= subject.length() - search.length();)
+	for (size_t i = 0; i < subject.length();)
 	{
-		assert(i + search.size() <= subject.length());
-		if (std::equal(subject.begin() + i, subject.begin() + i + search.size(), search.begin()))
+		if (i <= subject.length() - search.length() &&
+					std::equal(subject.begin() + i, subject.begin() + i + search.size(), search.begin()))
 		{
 			
 			str += replace;
 			i += search.size();
-			std::cout << i << "   " <<subject[i] << "   "<<str << std::endl;
 		}
 		else
 		{

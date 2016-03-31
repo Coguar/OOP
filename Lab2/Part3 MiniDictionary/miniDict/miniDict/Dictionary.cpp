@@ -4,19 +4,19 @@
 CDictionary::CDictionary()
 {
 	m_dictionaryFile = DIC_FILE;
-	LoadDictionaryFromFile();
+	LoadDictionary();
 }
 
-void CDictionary::AddNewWord(std::string englishWord, std::string russianWord)
+void CDictionary::AddNewWord(std::string const& englishWord, std::string const& russianWord)
 {
-	m_dictionaryList.insert(std::pair<std::string, std::string>(englishWord, russianWord));
+	m_dictionaryList.insert({ englishWord, russianWord });
 
 	m_newCollocations.push_back(englishWord + "=" + russianWord);
 
 	std::cout << FINISH_ADD_WORD_STRING << russianWord << std::endl;
 }
 
-bool CDictionary::FindWord(std::string englishWord)
+bool CDictionary::FindWord(std::string const& englishWord) const
 {
 	auto word = m_dictionaryList.find(englishWord);
 	if (word == m_dictionaryList.end())
@@ -28,29 +28,23 @@ bool CDictionary::FindWord(std::string englishWord)
 	return true;
 }
 
-Collocation GetPairOfWords(std::string line)
+Collocation SplitPairOfWords(std::string const& line)
 {
-	bool isSecondWord = false;
+	std::vector<std::string> words;
+	boost::split(words, line, boost::is_any_of(DELIMITER));
 
 	std::string rusWord;
 	std::string engWord;
-
-	for (auto &it : line)
+	if (words.size() >= 2)
 	{
-		if (it == DELIMITER && isSecondWord == false)
-		{
-			isSecondWord = true;
-		}
-		switch (isSecondWord)
-		{
-		case false: engWord += it;	break;
-		case true: if (it != DELIMITER) rusWord += it;	break;
-		}
+		rusWord = words[1];
+		engWord = words[0];
 	}
+
 	return Collocation(engWord, rusWord);
 }
 
-void CDictionary::LoadDictionaryFromFile()
+void CDictionary::LoadDictionary()
 {
 	std::string line;
 
@@ -58,12 +52,12 @@ void CDictionary::LoadDictionaryFromFile()
 	while (std::getline(dictInputFile, line))
 	{
 
-		m_dictionaryList.insert(GetPairOfWords(line));
+		m_dictionaryList.insert(SplitPairOfWords(line));
 	}
 	dictInputFile.close();
 }
 
-void CDictionary::SaveChanges()
+void CDictionary::SaveChanges() const
 {
 	std::ofstream dictFile(m_dictionaryFile, std::ios_base::app);
 	for (auto &it : m_newCollocations)
@@ -73,7 +67,7 @@ void CDictionary::SaveChanges()
 	dictFile.close();
 }
 
-void CDictionary::DictionarySave()
+void CDictionary::DictionarySave() const
 {
 	if (!m_newCollocations.empty())
 	{
@@ -81,7 +75,8 @@ void CDictionary::DictionarySave()
 	}
 }
 
-void CDictionary::SetDictionaryFile(std::string fileName)
+void CDictionary::SetDictionaryFile(std::string const& fileName)
 {
 	m_dictionaryFile = fileName;
+	LoadDictionary();
 }

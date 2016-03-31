@@ -4,27 +4,33 @@
 CTranslator::CTranslator(CDictionary & dict)
 	:m_dict(dict)
 {
-	m_state = findWord;
+
 }
 
-void CTranslator::DialogWithUser(std::string word)
+void CTranslator::DoDialogWithUser(std::string const& word)
 {
-
-	while (m_state != finish)
+	enum State
 	{
-		switch (m_state)
+		FIND_WORD, ADD_WORD, FINISH
+	};
+
+	State state = FIND_WORD;
+
+	while (state != FINISH)
+	{
+		switch (state)
 		{
-		case findWord:
+		case FIND_WORD:
 			if (m_dict.FindWord(word))
 			{
-				m_state = finish;
+				state = FINISH;
 			}
 			else
 			{
-				m_state = addWord;
+				state = ADD_WORD;
 			}
 			break;
-		case addWord:
+		case ADD_WORD:
 			std::cout << WHETHER_ADD_WORD_STRING << std::endl;
 			std::string translate;
 			std::getline(std::cin, translate);
@@ -33,11 +39,11 @@ void CTranslator::DialogWithUser(std::string word)
 				m_dict.AddNewWord(word, translate);
 			}
 
-			m_state = finish;
+			state = FINISH;
 			break;
 		}
 
 	}
-	m_state = findWord;
+	state = FIND_WORD;
 }
 

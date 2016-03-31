@@ -6,14 +6,9 @@ class CTranslator
 public:
 	CTranslator(CDictionary & dict);
 
-	void DialogWithUser(std::string word);
+	void DoDialogWithUser(std::string const& word);
 
 private:
 	CDictionary & m_dict;
-
-	enum state
-	{
-		findWord, addWord, finish
-	} m_state;
 
 };
