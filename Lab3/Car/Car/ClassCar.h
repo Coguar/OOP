@@ -18,7 +18,7 @@ class CCar
 {
 public:
 	CCar();
-	~CCar();
+	~CCar() = default;
 
 	bool IsEngineWorking() const
 	{

@@ -9,9 +9,6 @@ CCar::CCar()
 {
 }
 
-CCar::~CCar()
-{
-}
 
 bool CCar::TurnOnEngine()
 {
