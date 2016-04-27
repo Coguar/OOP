@@ -1,17 +1,17 @@
 #pragma once
 
-static const enum STATES_GEARBOX { back = -1, neutral = 0, first = 1, second = 2, third = 3, fourth = 4, fifth = 5 };
+enum class States_Gearbox { back = -1, neutral = 0, first = 1, second = 2, third = 3, fourth = 4, fifth = 5 };
 
-static const enum MOVEMENT_DIRECTION {backward = -1, stay = 0, forward = 1};
+enum class Movement_Direction {Backward = -1, Stopped = 0, Forward = 1};
 
-static const std::map<STATES_GEARBOX, std::pair<unsigned, unsigned>> SPEED_RANGE = {
-	{back, {0, 20}},
-	{neutral, {0, 150}},
-	{first, {0, 30}},
-	{second, {20, 50}},
-	{third, {30, 60}},
-	{fourth, {40, 90}},
-	{fifth, {50, 150}}
+static const std::map<States_Gearbox, std::pair<unsigned, unsigned>> SPEED_RANGE = {
+	{ States_Gearbox::back, {0, 20}},
+	{ States_Gearbox::neutral, {0, 150}},
+	{ States_Gearbox::first, {0, 30}},
+	{ States_Gearbox::second, {20, 50}},
+	{ States_Gearbox::third, {30, 60}},
+	{ States_Gearbox::fourth, {40, 90}},
+	{ States_Gearbox::fifth, {50, 150}}
 };
 
 class CCar
@@ -29,15 +29,15 @@ public:
 
 	bool TurnOffEngine();
 
-	int GetGear() const;
+	States_Gearbox GetGear() const;
 
-	int GetMovementDirection() const;
+	Movement_Direction GetMovementDirection() const;
 
 	unsigned GetCurrentSpeed() const;
 
 	bool SetSpeed(unsigned const& speed);
 
-	bool SetGear(STATES_GEARBOX const& gearState);
+	bool SetGear(States_Gearbox const& gearState);
 
 
 private:
@@ -48,9 +48,9 @@ private:
 
 	bool m_isEngineTurnedOn;
 
-	STATES_GEARBOX m_gearboxState;
+	States_Gearbox m_gearboxState;
 
-	MOVEMENT_DIRECTION m_movementDirection;
+	Movement_Direction m_movementDirection;
 };
 
 

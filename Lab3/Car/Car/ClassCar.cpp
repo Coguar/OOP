@@ -3,8 +3,8 @@
 
 CCar::CCar()
 	: m_isEngineTurnedOn(false)
-	, m_gearboxState(neutral)
-	, m_movementDirection(stay)
+	, m_gearboxState(States_Gearbox::neutral)
+	, m_movementDirection(Movement_Direction::Stopped)
 	, m_currentSpeed(0)
 {
 }
@@ -22,7 +22,7 @@ bool CCar::TurnOnEngine()
 
 bool CCar::TurnOffEngine()
 {
-	if (!m_isEngineTurnedOn || m_currentSpeed != 0 || m_gearboxState != neutral)
+	if (!m_isEngineTurnedOn || m_currentSpeed != 0 || m_gearboxState != States_Gearbox::neutral)
 	{
 		return false;
 	}
@@ -30,12 +30,12 @@ bool CCar::TurnOffEngine()
 	return true;
 }
 
-int CCar::GetGear() const
+States_Gearbox CCar::GetGear() const
 {
 	return m_gearboxState;
 }
 
-int CCar::GetMovementDirection() const
+Movement_Direction CCar::GetMovementDirection() const
 {
 	return m_movementDirection;
 }
@@ -47,7 +47,7 @@ unsigned CCar::GetCurrentSpeed() const
 
 bool CCar::SetSpeed(unsigned const& speed)
 {
-	if (!m_isEngineTurnedOn || (speed > m_currentSpeed && m_gearboxState == neutral))
+	if (!m_isEngineTurnedOn || (speed > m_currentSpeed && m_gearboxState == States_Gearbox::neutral))
 		return false;
 	auto speed_limits = SPEED_RANGE.find(m_gearboxState)->second;
 	if (speed_limits.first <= speed && speed_limits.second >= speed)
@@ -59,18 +59,18 @@ bool CCar::SetSpeed(unsigned const& speed)
 	return false;
 }
 
-bool CCar::SetGear(STATES_GEARBOX const& gearState)
+bool CCar::SetGear(States_Gearbox const& gearState)
 {
 	if (!m_isEngineTurnedOn)
 		return false;
 
-	if (gearState == back && m_currentSpeed != 0)
+	if (gearState == States_Gearbox::back && m_currentSpeed != 0)
 		return false;
 
-	if (gearState == first && m_currentSpeed != 0)
+	if (gearState == States_Gearbox::first && m_currentSpeed != 0)
 		return false;
 
-	if (m_gearboxState == back && (gearState != back && gearState != neutral) && m_currentSpeed != 0)
+	if (m_gearboxState == States_Gearbox::back && (gearState != States_Gearbox::back && gearState != States_Gearbox::neutral) && m_currentSpeed != 0)
 		return false;
 
 	auto speed_limits = SPEED_RANGE.find(gearState)->second;
@@ -87,17 +87,17 @@ void CCar::SetMovementDirection()
 {
 	if (m_currentSpeed != 0)
 	{
-		if (m_gearboxState == back)
+		if (m_gearboxState == States_Gearbox::back)
 		{
-			m_movementDirection = backward;
+			m_movementDirection = Movement_Direction::Backward;
 		}
-		else if (m_gearboxState != neutral)
+		else if (m_gearboxState != States_Gearbox::neutral)
 		{
-			m_movementDirection = forward;
+			m_movementDirection = Movement_Direction::Forward;
 		}
 	}
 	else
 	{
-		m_movementDirection = stay;
+		m_movementDirection = Movement_Direction::Stopped;
 	}
 }

@@ -6,30 +6,30 @@
 
 using namespace std;
 
-static const map <string, STATES_GEARBOX> GEARBOX_STATES_MAP = {
-	{"back", back},
-	{ "neutral", neutral },
-	{ "first", first },
-	{ "second", second },
-	{ "third", third },
-	{ "fourth", fourth },
-	{ "fifth", fifth }
+static const map <string, States_Gearbox> GEARBOX_STATES_MAP = {
+	{"back", States_Gearbox::back},
+	{ "neutral", States_Gearbox::neutral },
+	{ "first", States_Gearbox::first },
+	{ "second", States_Gearbox::second },
+	{ "third", States_Gearbox::third },
+	{ "fourth", States_Gearbox::fourth },
+	{ "fifth", States_Gearbox::fifth }
 };
 
-static const map <int, string> GEARBOX_INFO_MAP = {
-	{ -1, "back" },
-	{ 0, "neutral" },
-	{ 1, "first" },
-	{ 2, "second" },
-	{ 3, "third" },
-	{ 4, "fourth" },
-	{ 5, "fifth" }
+static const map <States_Gearbox, string> GEARBOX_INFO_MAP = {
+	{ States_Gearbox::back, "back" },
+	{ States_Gearbox::neutral, "neutral" },
+	{ States_Gearbox::first, "first" },
+	{ States_Gearbox::second, "second" },
+	{ States_Gearbox::third, "third" },
+	{ States_Gearbox::fourth, "fourth" },
+	{ States_Gearbox::fifth, "fifth" }
 };
 
-static const map <int, string> MOVEMENT_INFO_MAP = {
-	{ 1, "Forward"},
-	{ -1, "Backward" },
-	{ 0, "Stay" }
+static const map <Movement_Direction, string> MOVEMENT_INFO_MAP = {
+	{ Movement_Direction::Forward, "Forward"},
+	{ Movement_Direction::Backward, "Backward" },
+	{ Movement_Direction::Stopped, "Stay" }
 };
 
 void ShowCarInfo(CCar const& car)
