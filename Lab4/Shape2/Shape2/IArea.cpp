@@ -31,35 +31,3 @@ GetAreaFn AreaCalculateMethods::MakeTriangleAreaFn(std::reference_wrapper<CLineS
 		return sqrt(perimetr * (perimetr - side1.get().GetShapePerimetr()) * (perimetr - side2.get().GetShapePerimetr()) * (perimetr - side3.get().GetShapePerimetr()));
 	};
 }
-
-CRectangleArea::CRectangleArea(double & width, double & height)
-{
-	auto area = AreaCalculateMethods::MakeRectangleAreaFn(width, height);
-	SetArea(area);
-}
-
-CCircleArea::CCircleArea(double & radius)
-{
-
-	auto area = AreaCalculateMethods::MakeCircleAreaFn(radius);
-	SetArea(area);
-
-}
-
-CLineSegmentArea::CLineSegmentArea()
-{
-	SetArea(AreaCalculateMethods::MakeZeroAreaFn());
-
-}
-
-CPointArea::CPointArea()
-{
-	SetArea(AreaCalculateMethods::MakeZeroAreaFn());
-
-}
-
-CTriangleArea::CTriangleArea(CLineSegment & side1, CLineSegment & side2, CLineSegment & side3)
-{
-	auto area = AreaCalculateMethods::MakeTriangleAreaFn(side1, side2, side3);
-	SetArea(area);
-}

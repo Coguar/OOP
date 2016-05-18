@@ -33,14 +33,14 @@ public:
 	std::string ShapeToString() override;
 
 	void SetLineColor(std::string const& color);
-	void SetPerimetrMethod(std::unique_ptr<IPerimetr> && perimetrMethod);
 
-	// TODO: make protected
-	void SetAreaMethod(std::unique_ptr<IArea> && areaMethod);
+protected:
+	void SetPerimetrMethod(std::unique_ptr<GetPerimetrFn> && perimetrMethod);
+	void SetAreaMethod(std::unique_ptr<GetAreaFn> && areaMethod);
 	void SetStringMethod(std::unique_ptr<IStringRepresentation> && strMethod);
 private:
-	std::unique_ptr<IPerimetr> m_perimetr;
-	std::unique_ptr<IArea> m_area;
+	std::unique_ptr<GetPerimetrFn> m_perimetr;
+	std::unique_ptr<GetAreaFn> m_area;
 	std::unique_ptr<IStringRepresentation> m_strRepr;
 
 	std::string m_lineColor;
