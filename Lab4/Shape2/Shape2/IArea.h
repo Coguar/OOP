@@ -1,10 +1,21 @@
 #pragma once
-#include "Shapes.h"
+using GetAreaFn = std::function<double()>;
+class CLineSegment;
+
+class AreaCalculateMethods
+{
+public:
+	static GetAreaFn MakeRectangleAreaFn(std::reference_wrapper<double> widthRef, std::reference_wrapper<double> heightRef);
+	static GetAreaFn MakeZeroAreaFn();
+	static GetAreaFn MakeCircleAreaFn(std::reference_wrapper<double> radius);
+	static GetAreaFn MakeTriangleAreaFn(std::reference_wrapper<CLineSegment> side1, std::reference_wrapper<CLineSegment> side2, std::reference_wrapper<CLineSegment> side3);
+};
+
 //структура есть
 struct IArea
 {
 	virtual ~IArea() {};
-	//методд есть
+	//метод есть
 	virtual double GetArea() = 0;
 };
 
@@ -13,27 +24,27 @@ class CAbstractAreaShape : public IArea
 public:
 	double GetArea() override
 	{
-		return m_area;
+		return m_areaFn();
 	}
-	void SetArea(double const& area)
+	void SetArea(GetAreaFn const& area)
 	{
-		m_area = area;
+		m_areaFn = area;
 	}
 private:
-	double m_area;
+	GetAreaFn m_areaFn;
 };
 
 class CRectangleArea : public CAbstractAreaShape
 {
 public:
-	CRectangleArea(double const& width, double const& height);
+	CRectangleArea(double & width, double & height);
 };
 
 
 class CCircleArea : public CAbstractAreaShape
 {
 public:
-	CCircleArea(double const& radius);
+	CCircleArea(double & radius);
 };
 
 class CLineSegmentArea : public CAbstractAreaShape
@@ -52,5 +63,5 @@ public:
 class CTriangleArea : public CAbstractAreaShape
 {
 public:
-	CTriangleArea(double const & side1, double const & side2, double const & side3);
+	CTriangleArea(CLineSegment & side1, CLineSegment & side2, CLineSegment & side3);
 };

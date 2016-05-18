@@ -2,6 +2,19 @@
 #include "Shapes.h"
 
 class CPoint;
+class CLineSegment;
+
+using GetPerimetrFn = std::function<double()>;
+
+class PerimetrCalculateMethods
+{
+public:
+	static GetPerimetrFn MakeRectanglePerimetrFn(std::reference_wrapper<double> widthRef, std::reference_wrapper<double> heightRef);
+	static GetPerimetrFn MakeZeroPerimetrFn();
+	static GetPerimetrFn MakeCirclePerimetrFn(std::reference_wrapper<double> radius);
+	static GetPerimetrFn MakeTrianglePerimetrFn(std::reference_wrapper<CLineSegment> side1, std::reference_wrapper<CLineSegment> side2, std::reference_wrapper<CLineSegment> side3);
+	static GetPerimetrFn MakeLinePerimetrFn(std::reference_wrapper<CPoint> point1, std::reference_wrapper<CPoint> point2);
+};
 
 struct IPerimetr
 {
@@ -14,38 +27,38 @@ class CAbstractPerimetrShape : public IPerimetr
 public:
 	virtual double GetPerimetr() override
 	{
-		return m_perimetr;
+		return m_perimetr();
 	}
-	void SetPerimetr(double const& perimetr)
+	void SetPerimetr(GetPerimetrFn const& perimetr)
 	{
 		m_perimetr = perimetr;
 	}
 private:
-	double m_perimetr;
+	GetPerimetrFn m_perimetr;
 };
 
 class CRectanglePerimetr : public CAbstractPerimetrShape
 {
 public:
-	CRectanglePerimetr(double const& width, double const& height);
+	CRectanglePerimetr(double & width, double & height);
 };
 
 class CTrianglePerimetr : public CAbstractPerimetrShape
 {
 public:
-	CTrianglePerimetr(double const & side1, double const & side2, double const & side3);
+	CTrianglePerimetr(CLineSegment & side1, CLineSegment & side2, CLineSegment & side3);
 };
 
 class CCirclePerimetr : public CAbstractPerimetrShape
 {
 public:
-	CCirclePerimetr(double const& radius);
+	CCirclePerimetr(double & radius);
 };
 
 class CLineSegmentPerimetr : public CAbstractPerimetrShape
 {
 public:
-	CLineSegmentPerimetr(CPoint const& begin, CPoint const& end);
+	CLineSegmentPerimetr(CPoint & begin, CPoint & end);
 };
 
 class CPointPerimetr : public CAbstractPerimetrShape

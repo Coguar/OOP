@@ -16,5 +16,11 @@
 #include <memory>
 #include <string>
 #include <cassert>
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <functional>
+
 
 // TODO: reference additional headers your program requires here

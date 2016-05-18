@@ -1,7 +1,7 @@
 #pragma once
 #include "Perimetr.h"
-#include "IArea.h"
 #include "StringRepresentation.h"
+#include "IArea.h"
 
 struct IStringRepresentation;
 struct IArea;
@@ -13,44 +13,31 @@ struct Coordinate
 	double y;
 };
 
-class IShape
+struct IShape
+{
+	virtual double GetShapePerimetr() = 0;
+	virtual double GetShapeArea() = 0;
+	virtual std::string ShapeToString() = 0;
+};
+
+// todo rename since its abstract class
+class CAbstractShape : public IShape
 {
 public:
-	IShape() 
+	CAbstractShape()
 	{
 		SetLineColor("#000000"); 
 	}
-	double GetShapePerimetr()
-	{
-		return m_perimetr->GetPerimetr();
-	}
-	double GetShapeArea()
-	{
-		return m_area->GetArea();
-	}
-	std::string ShapeToString()
-	{
-		return m_strRepr->ToString();
-	}
-	void SetLineColor(std::string const& color)
-	{
-		m_lineColor = color;
-	}
-	void SetPerimetrMethod(std::unique_ptr<IPerimetr> && perimetrMethod)
-	{
-		assert(perimetrMethod);
-		m_perimetr = move(perimetrMethod);
-	}
-	void SetAreaMethod(std::unique_ptr<IArea> && areaMethod)
-	{
-		assert(areaMethod);
-		m_area = move(areaMethod);
-	}
-	void SetStringMethod(std::unique_ptr<IStringRepresentation> && strMethod)
-	{
-		assert(strMethod);
-		m_strRepr = move(strMethod);
-	}
+	double GetShapePerimetr() override; 
+	double GetShapeArea() override;
+	std::string ShapeToString() override;
+
+	void SetLineColor(std::string const& color);
+	void SetPerimetrMethod(std::unique_ptr<IPerimetr> && perimetrMethod);
+
+	// TODO: make protected
+	void SetAreaMethod(std::unique_ptr<IArea> && areaMethod);
+	void SetStringMethod(std::unique_ptr<IStringRepresentation> && strMethod);
 private:
 	std::unique_ptr<IPerimetr> m_perimetr;
 	std::unique_ptr<IArea> m_area;
@@ -59,10 +46,10 @@ private:
 	std::string m_lineColor;
 };
 
-class ISolidShape : public IShape
+class CAbstractSolidShape : public CAbstractShape
 {
 public:
-	ISolidShape() 
+	CAbstractSolidShape()
 	{ 
 		SetFillColor("#000000"); 
 	}
@@ -76,19 +63,18 @@ private:
 
 /////CPoint/////
 
-class CPoint : public IShape
+class CPoint : public CAbstractShape
 {
 public:
 	CPoint(Coordinate const& pos);
-	const double operator-(const CPoint& rv) const;
-
+	static double GetDistance(CPoint const& first, CPoint const& second);
 private:
 	Coordinate m_pos;
 };
 
 /////CLineSegment/////
 
-class CLineSegment : public IShape
+class CLineSegment : public CAbstractShape
 {
 public:
 	CLineSegment(Coordinate const& bPos, Coordinate const& ePos);
@@ -100,7 +86,7 @@ private:
 
 /////CRectangle/////
 
-class CRectangle : public IShape
+class CRectangle : public CAbstractSolidShape
 {
 public:
 	CRectangle(Coordinate const& pos, double const& width, double const& height);
@@ -109,4 +95,28 @@ private:
 	double m_width;
 	double m_height;
 
+};
+
+/////CCircle/////
+class CCircle : public CAbstractSolidShape
+{
+public:
+	CCircle(Coordinate const& pos, double const& radius);
+private:
+	std::unique_ptr<CPoint> m_pos;
+	double m_radius;
+};
+
+/////CTriangle/////
+class CTriangle : public CAbstractSolidShape
+{
+public:
+	CTriangle(Coordinate const& pos1, Coordinate const& pos2, Coordinate const& pos3);
+private:
+	std::unique_ptr<CPoint> m_pos1;
+	std::unique_ptr<CPoint> m_pos2;
+	std::unique_ptr<CPoint> m_pos3;
+	std::unique_ptr<CLineSegment> m_side1;
+	std::unique_ptr<CLineSegment> m_side2;
+	std::unique_ptr<CLineSegment> m_side3;
 };

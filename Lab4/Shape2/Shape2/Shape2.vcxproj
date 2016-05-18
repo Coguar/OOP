@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="IArea.h" />
     <ClInclude Include="Perimetr.h" />
     <ClInclude Include="Shapes.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="IArea.cpp" />
     <ClCompile Include="Perimetr.cpp" />
     <ClCompile Include="main.cpp" />

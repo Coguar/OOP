@@ -45,5 +45,49 @@ CLineSegmentStr::CLineSegmentStr(Coordinate const& pos1, Coordinate const& pos2,
 	str += ", ";
 	str += std::to_string(pos2.y);
 	str += ">";
+	str += " S = ";
+	str += std::to_string(S);
+	str += " P = ";
+	str += std::to_string(P);
 	SetStr(str);
+}
+
+CCircleStr::CCircleStr(Coordinate const & pos, double const & radius, double const & P, double const & S)
+{
+	std::string str = "Circle ";
+	str += "<";
+	str += std::to_string(pos.x);
+	str += ", ";
+	str += std::to_string(pos.y);
+	str += "> R = ";
+	str += std::to_string(radius);
+	str += " S = ";
+	str += std::to_string(S);
+	str += " P = ";
+	str += std::to_string(P);
+	SetStr(str);
+}
+
+CTriangleStr::CTriangleStr(Coordinate const & pos1, Coordinate const & pos2, Coordinate const & pos3, double const & P, double const & S)
+{
+	std::string str = "Triangle ";
+	str += "<";
+	str += std::to_string(pos1.x);
+	str += ", ";
+	str += std::to_string(pos1.y);
+	str += "><";
+	str += std::to_string(pos2.x);
+	str += ", ";
+	str += std::to_string(pos2.y);
+	str += "><";
+	str += std::to_string(pos3.x);
+	str += ", ";
+	str += std::to_string(pos3.y);
+	str += ">";
+	str += " S = ";
+	str += std::to_string(S);
+	str += " P = ";
+	str += std::to_string(P);
+	SetStr(str);
+
 }

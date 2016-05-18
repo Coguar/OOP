@@ -35,7 +35,7 @@ public:
 class CCircleStr : public CAbstractStrShape
 {
 public:
-	CCircleStr(double const& radius);
+	CCircleStr(Coordinate const& pos, double const& radius, double const & P, double const & S);
 };
 
 class CLineSegmentStr : public CAbstractStrShape
@@ -48,5 +48,12 @@ class CPointStr : public CAbstractStrShape
 {
 public:
 	CPointStr(Coordinate const& pos, double const & P, double const & S);
+
+};
+
+class CTriangleStr : public CAbstractStrShape
+{
+public:
+	CTriangleStr(Coordinate const& pos1, Coordinate const& pos2, Coordinate const& pos3, double const & P, double const & S);
 
 };
