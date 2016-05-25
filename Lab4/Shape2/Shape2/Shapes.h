@@ -35,12 +35,12 @@ public:
 	void SetLineColor(std::string const& color);
 
 protected:
-	void SetPerimetrMethod(std::unique_ptr<GetPerimetrFn> && perimetrMethod);
-	void SetAreaMethod(std::unique_ptr<GetAreaFn> && areaMethod);
+	void SetPerimetrMethod(GetPerimetrFn && perimetrMethod);
+	void SetAreaMethod(GetAreaFn && areaMethod);
 	void SetStringMethod(std::unique_ptr<IStringRepresentation> && strMethod);
 private:
-	std::unique_ptr<GetPerimetrFn> m_perimetr;
-	std::unique_ptr<GetAreaFn> m_area;
+	GetPerimetrFn m_perimetr;
+	GetAreaFn m_area;
 	std::unique_ptr<IStringRepresentation> m_strRepr;
 
 	std::string m_lineColor;

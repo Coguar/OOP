@@ -27,6 +27,10 @@ public:
 		Protocol protocol = HTTP,
 		unsigned short port = 80);
 
+	CHttpUrl(
+		std::string const& domain,
+		std::string const& document,
+		Protocol protocol = HTTP);
 	// возвращает строковое представление URL-а. Порт, являющийся стандартным для
 	// выбранного протокола (80 для http и 443 для https) в URL не должен включаться
 	std::string GetURL()const;
